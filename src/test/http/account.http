@@ -4,5 +4,18 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "initialBalance": 10000
+  "initialBalance": 100022
 }
+
+### Delete Account
+DELETE  http://localhost:8080/account
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "accountNumber": "1000000004"
+}
+
+### GET Account
+GET http://localhost:8080/account?user_id=1
+Accept: application/json
