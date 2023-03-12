@@ -4,9 +4,9 @@ import com.example.account.domain.Account;
 import com.example.account.domain.AccountUser;
 import com.example.account.dto.AccountDto;
 import com.example.account.exception.AccountException;
+import com.example.account.repository.AccountRepository;
 import com.example.account.repository.AccountUserRepository;
 import com.example.account.type.AccountStatus;
-import com.example.account.repository.AccountRepository;
 import com.example.account.type.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ class AccountServiceTest {
                 .willReturn(Optional.of(user));
         given(accountRepository.findFirstByOrderByIdDesc())
                 .willReturn(Optional.of(Account.builder()
-                                .accountNumber("1000000012")
+                        .accountNumber("1000000012")
                         .build()));
         given(accountRepository.save(any()))
                 .willReturn(Account.builder()
@@ -83,7 +83,7 @@ class AccountServiceTest {
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.findFirstByOrderByIdDesc())
-                .willReturn(Optional.empty() );  // OPTIONAL이 비었음
+                .willReturn(Optional.empty());  // OPTIONAL이 비었음
         given(accountRepository.save(any()))
                 .willReturn(Account.builder()
                         .accountUser(user)
@@ -102,7 +102,7 @@ class AccountServiceTest {
 
     // user가 없는 경우 (create)
     @Test
-    @DisplayName("해당 유저 없 - 계좌 생성 실패")
+    @DisplayName("해당 유저 없음 - 계좌 생성 실패")
     void createAccount_UserNotFound() {
         //given
         AccountUser user = AccountUser.builder()
@@ -187,7 +187,7 @@ class AccountServiceTest {
 
         //when
         AccountException exception = assertThrows(AccountException.class,
-                () -> accountService.deleteAccount(1L, "1234567890" ));
+                () -> accountService.deleteAccount(1L, "1234567890"));
 
         //then
         assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
@@ -212,7 +212,7 @@ class AccountServiceTest {
 
         //when
         AccountException exception = assertThrows(AccountException.class,
-                () -> accountService.deleteAccount(1L, "1234567890" ));
+                () -> accountService.deleteAccount(1L, "1234567890"));
 
         //then
         assertEquals(ErrorCode.ACCOUNT_NOT_FOUND, exception.getErrorCode());
@@ -245,7 +245,7 @@ class AccountServiceTest {
 
         //when
         AccountException exception = assertThrows(AccountException.class,
-                () -> accountService.deleteAccount(1L, "1234567890" ));
+                () -> accountService.deleteAccount(1L, "1234567890"));
 
         //then
         assertEquals(ErrorCode.USER_ACCOUNT_UN_MATCH, exception.getErrorCode());
@@ -356,7 +356,7 @@ class AccountServiceTest {
     void failedToGetAccounts() {
         //given
         given(accountUserRepository.findById(anyLong()))
-                .willReturn(Optional.empty() );
+                .willReturn(Optional.empty());
         //when
         AccountException exception = assertThrows(AccountException.class,
                 () -> accountService.getAccountsByUserId(100L));
