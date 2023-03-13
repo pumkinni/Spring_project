@@ -100,7 +100,7 @@ public class AccountService {
         }
 
         // 잔액이 있는 경우
-         if (account.getBalance() > 0) {
+        if (account.getBalance() > 0) {
             throw new AccountException(ErrorCode.BALANCE_NOT_EMPTY);
         }
 

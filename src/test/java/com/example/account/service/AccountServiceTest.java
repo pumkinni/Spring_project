@@ -134,7 +134,7 @@ class AccountServiceTest {
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.countByAccountUser(any()))
-                .willReturn(10);
+                .willReturn(11);
         //when
         AccountException exception = assertThrows(AccountException.class, () -> accountService.createAccount(1L, 1000L));
 
