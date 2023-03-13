@@ -12,8 +12,8 @@ DELETE  http://localhost:8080/account
 Content-Type: application/json
 
 {
-  "userId": 2,
-  "accountNumber": "1000000004"
+  "userId": 1,
+  "accountNumber": "1000000000"
 }
 
 ### GET Account

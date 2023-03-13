@@ -33,8 +33,8 @@ public class AccountService {
      */
     @Transactional
     public AccountDto createAccount(Long userId, Long initialBalance) {
-        AccountUser accountUser = accountUserRepository.findById(userId)
-                .orElseThrow(() -> new AccountException(USER_NOT_FOUND)); // 값이 없으면 throw를 발생
+        // 값이 없으면 throw를 발생
+        AccountUser accountUser = getAccountUser(userId);
 
         validateCreateAccount(accountUser);
 
@@ -48,6 +48,12 @@ public class AccountService {
                 .build());
 
         return AccountDto.fromEntity(account);
+    }
+
+    private AccountUser getAccountUser(Long userId) {
+        AccountUser accountUser = accountUserRepository.findById(userId)
+                .orElseThrow(() -> new AccountException(USER_NOT_FOUND));
+        return accountUser;
     }
 
     private void validateCreateAccount(AccountUser accountUser) {
@@ -68,8 +74,7 @@ public class AccountService {
     @Transactional
     public AccountDto deleteAccount(Long userId, String accountNumber) {
         // 사용자 유무 확인
-        AccountUser accountUser = accountUserRepository.findById(userId)
-                .orElseThrow(() -> new AccountException(USER_NOT_FOUND)); // 값이 없으면 throw를 발생
+        AccountUser accountUser = getAccountUser(userId);
 
         // 계좌 유무 확인
         Account account = accountRepository.findByAccountNumber(accountNumber)
@@ -108,8 +113,7 @@ public class AccountService {
 
     @Transactional
     public List<AccountDto> getAccountsByUserId(Long userId) {
-        AccountUser accountUser = accountUserRepository.findById(userId)
-                .orElseThrow(() -> new AccountException(USER_NOT_FOUND));
+        AccountUser accountUser = getAccountUser(userId);
 
         List<Account> account = accountRepository.findByAccountUser(accountUser);
 

@@ -44,9 +44,9 @@ class AccountServiceTest {
     void createAccountSuccess() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        user.setId(12L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
@@ -76,9 +76,9 @@ class AccountServiceTest {
     void createFirstAccount() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(18L)
                 .name("Pororo")
                 .build();
+        user.setId(18L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
@@ -106,9 +106,9 @@ class AccountServiceTest {
     void createAccount_UserNotFound() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(18L)
                 .name("Pororo")
                 .build();
+        user.setId(12L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.empty());
@@ -127,9 +127,9 @@ class AccountServiceTest {
     void createAccount_maxAccountIs10() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(18L)
                 .name("Pororo")
                 .build();
+        user.setId(18L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
@@ -147,9 +147,9 @@ class AccountServiceTest {
     void deleteAccountSuccess() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        user.setId(12L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
@@ -178,9 +178,9 @@ class AccountServiceTest {
     void deleteAccountFailed_UserNotFound() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(18L)
                 .name("Pororo")
                 .build();
+        user.setId(18L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.empty());
@@ -199,9 +199,9 @@ class AccountServiceTest {
     void deleteAccountFailed_AccountNotFound() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        user.setId(12L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
@@ -223,13 +223,13 @@ class AccountServiceTest {
     void deleteAccountFailed_userUnMatch() {
         //given
         AccountUser pororo = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        pororo.setId(12L);
         AccountUser dory = AccountUser.builder()
-                .id(13L)
                 .name("Dory")
                 .build();
+        dory.setId(13L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pororo));
@@ -256,9 +256,9 @@ class AccountServiceTest {
     void deleteAccountFailed_alreadyUnregistered() {
         //given
         AccountUser pororo = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        pororo.setId(12L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pororo));
@@ -286,9 +286,9 @@ class AccountServiceTest {
     void deleteAccountFailed_balanceNotEmpty() {
         //given
         AccountUser pororo = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        pororo.setId(12L);
 
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pororo));
@@ -314,9 +314,9 @@ class AccountServiceTest {
     void successGetAccountByUserId() {
         //given
         AccountUser pororo = AccountUser.builder()
-                .id(12L)
                 .name("Pororo")
                 .build();
+        pororo.setId(12L);
 
         List<Account> accounts = Arrays.asList(
                 Account.builder()
